@@ -1,6 +1,14 @@
-import cron from 'cron'
+import { sleep } from 'txstate-utils'
 import { ensureAnthemIsEncoded } from './anthem'
 
-cron.job('0 */5 * * * *', () => {
-  ensureAnthemIsEncoded().catch(e => console.error(e))
-}, null, true, 'America/Chicago')
+async function main () {
+  while (true) {
+    await ensureAnthemIsEncoded()
+    await sleep(1000 * 60 * 5)
+  }
+}
+
+main().catch(e => {
+  console.error(e)
+  process.exit(1)
+})

@@ -1,7 +1,8 @@
 import db from 'mssql-async/db'
 
 export async function ensureAnthemIsEncoded () {
-  return await db.execute(`
+  const start = new Date()
+  const success = await db.execute(`
 DECLARE @departmentID uniqueidentifier
 DECLARE @mediaWorkflowId uniqueidentifier
 DECLARE @domain varchar(max)
@@ -119,4 +120,6 @@ BEGIN
 CLOSE id_cursor
 DEALLOCATE id_cursor
   `)
+  console.info('completed in', new Date().getTime() - start.getTime(), 'ms')
+  return success
 }
