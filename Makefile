@@ -25,8 +25,6 @@ save-prod:
 prod: save-prod
 	@echo "$(OK_COLOR)==>$(NO_COLOR) Pulling $(IMAGE_NAME):$(QUAL_TAG)"
 	@docker pull $(IMAGE_NAME):$(QUAL_TAG)
-	@echo "$(OK_COLOR)==>$(NO_COLOR) Pulling $(IMAGE_NAME):$(PROD_TAG)"
-	@docker pull $(IMAGE_NAME):$(PROD_TAG)
 	@echo "$(OK_COLOR)==>$(NO_COLOR) Tagging $(IMAGE_NAME):$(QUAL_TAG) -> $(IMAGE_NAME):$(PROD_TAG)"
 	@docker tag $(IMAGE_NAME):$(QUAL_TAG) $(IMAGE_NAME):$(PROD_TAG)
 	@echo "$(OK_COLOR)==>$(NO_COLOR) Pushing $(IMAGE_NAME):$(PROD_TAG)"
